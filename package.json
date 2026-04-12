@@ -1,0 +1,53 @@
+{
+	"name": "n8n-nodes-arca",
+	"version": "1.0.0",
+	"description": "N8N nodes for the Arca API, providing workspace, folder, list, task, status, label, and comment management.",
+	"keywords": [
+		"n8n-community-node-package",
+		"arca",
+		"workspace",
+		"tasks",
+		"api"
+	],
+	"license": "MIT",
+	"homepage": "https://docs.getarca.app/",
+	"author": {
+		"name": "Arca",
+		"email": "support@getarca.app"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/arca/n8n-nodes-arca.git"
+	},
+	"main": "index.js",
+	"scripts": {
+		"build": "tsc && gulp build:icons",
+		"dev": "tsc --watch",
+		"format": "prettier nodes credentials --write",
+		"lint": "eslint nodes credentials package.json",
+		"lintfix": "eslint nodes credentials package.json --fix",
+		"prepublishOnly": "npm run build && npm run lint -c .eslintrc.prepublish.js nodes credentials package.json"
+	},
+	"files": [
+		"dist"
+	],
+	"n8n": {
+		"n8nNodesApiVersion": 1,
+		"credentials": [
+			"dist/credentials/ArcaApi.credentials.js"
+		],
+		"nodes": [
+			"dist/nodes/Arca/Arca.node.js"
+		]
+	},
+	"devDependencies": {
+		"@typescript-eslint/parser": "~5.45",
+		"eslint-plugin-n8n-nodes-base": "^1.11.0",
+		"gulp": "^4.0.2",
+		"prettier": "^2.7.1",
+		"typescript": "^6.0.2"
+	},
+	"peerDependencies": {
+		"n8n-workflow": "*"
+	}
+}
