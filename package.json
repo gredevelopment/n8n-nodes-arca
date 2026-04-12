@@ -37,7 +37,8 @@
 			"dist/credentials/ArcaApi.credentials.js"
 		],
 		"nodes": [
-			"dist/nodes/Arca/Arca.node.js"
+			"dist/nodes/Arca/Arca.node.js",
+			"dist/nodes/ArcaTrigger/ArcaTrigger.node.js"
 		]
 	},
 	"devDependencies": {
