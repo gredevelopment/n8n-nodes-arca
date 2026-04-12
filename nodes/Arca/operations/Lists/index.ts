@@ -1,8 +1,10 @@
 import { IExecuteFunctions, IHttpRequestOptions, INodeExecutionData } from 'n8n-workflow';
+import { baseUrl } from '../../baseUrl';
 
-const baseUrl = 'https://api.getarca.app/api/v1';
-
-export async function listLists(this: IExecuteFunctions, index: number): Promise<INodeExecutionData> {
+export async function listLists(
+	this: IExecuteFunctions,
+	index: number,
+): Promise<INodeExecutionData> {
 	const workspaceId = this.getNodeParameter('workspaceId', index) as number;
 
 	const options: IHttpRequestOptions = {
@@ -19,7 +21,10 @@ export async function listLists(this: IExecuteFunctions, index: number): Promise
 	};
 }
 
-export async function createList(this: IExecuteFunctions, index: number): Promise<INodeExecutionData> {
+export async function createList(
+	this: IExecuteFunctions,
+	index: number,
+): Promise<INodeExecutionData> {
 	const workspaceId = this.getNodeParameter('workspaceId', index) as number;
 	const folderId = this.getNodeParameter('folderId', index) as number;
 	const name = this.getNodeParameter('name', index) as string;
@@ -52,7 +57,10 @@ export async function createList(this: IExecuteFunctions, index: number): Promis
 	};
 }
 
-export async function updateList(this: IExecuteFunctions, index: number): Promise<INodeExecutionData> {
+export async function updateList(
+	this: IExecuteFunctions,
+	index: number,
+): Promise<INodeExecutionData> {
 	const listId = this.getNodeParameter('listIdToModify', index) as number;
 	const folderId = this.getNodeParameter('folderId', index) as number;
 	const name = this.getNodeParameter('name', index) as string;
@@ -89,7 +97,10 @@ export async function updateList(this: IExecuteFunctions, index: number): Promis
 	};
 }
 
-export async function deleteList(this: IExecuteFunctions, index: number): Promise<INodeExecutionData> {
+export async function deleteList(
+	this: IExecuteFunctions,
+	index: number,
+): Promise<INodeExecutionData> {
 	const listId = this.getNodeParameter('listIdToModify', index) as number;
 
 	const options: IHttpRequestOptions = {

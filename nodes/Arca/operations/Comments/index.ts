@@ -1,8 +1,10 @@
 import { IExecuteFunctions, IHttpRequestOptions, INodeExecutionData } from 'n8n-workflow';
+import { baseUrl } from '../../baseUrl';
 
-const baseUrl = 'https://api.getarca.app/api/v1';
-
-export async function listComments(this: IExecuteFunctions, index: number): Promise<INodeExecutionData> {
+export async function listComments(
+	this: IExecuteFunctions,
+	index: number,
+): Promise<INodeExecutionData> {
 	const taskId = this.getNodeParameter('taskId', index) as number;
 
 	const options: IHttpRequestOptions = {
@@ -19,7 +21,10 @@ export async function listComments(this: IExecuteFunctions, index: number): Prom
 	};
 }
 
-export async function createComment(this: IExecuteFunctions, index: number): Promise<INodeExecutionData> {
+export async function createComment(
+	this: IExecuteFunctions,
+	index: number,
+): Promise<INodeExecutionData> {
 	const taskId = this.getNodeParameter('taskId', index) as number;
 	const content = this.getNodeParameter('content', index) as string;
 

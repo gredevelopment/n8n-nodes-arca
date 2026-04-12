@@ -1,8 +1,10 @@
 import { IExecuteFunctions, IHttpRequestOptions, INodeExecutionData } from 'n8n-workflow';
+import { baseUrl } from '../../baseUrl';
 
-const baseUrl = 'https://api.getarca.app/api/v1';
-
-export async function listWorkspaces(this: IExecuteFunctions, index: number): Promise<INodeExecutionData> {
+export async function listWorkspaces(
+	this: IExecuteFunctions,
+	index: number,
+): Promise<INodeExecutionData> {
 	const options: IHttpRequestOptions = {
 		method: 'GET',
 		url: `${baseUrl}/workspaces`,
@@ -17,7 +19,10 @@ export async function listWorkspaces(this: IExecuteFunctions, index: number): Pr
 	};
 }
 
-export async function getWorkspace(this: IExecuteFunctions, index: number): Promise<INodeExecutionData> {
+export async function getWorkspace(
+	this: IExecuteFunctions,
+	index: number,
+): Promise<INodeExecutionData> {
 	const workspaceId = this.getNodeParameter('workspaceId', index) as number;
 
 	const options: IHttpRequestOptions = {
@@ -34,7 +39,10 @@ export async function getWorkspace(this: IExecuteFunctions, index: number): Prom
 	};
 }
 
-export async function listWorkspaceMembers(this: IExecuteFunctions, index: number): Promise<INodeExecutionData> {
+export async function listWorkspaceMembers(
+	this: IExecuteFunctions,
+	index: number,
+): Promise<INodeExecutionData> {
 	const workspaceId = this.getNodeParameter('workspaceId', index) as number;
 
 	const options: IHttpRequestOptions = {

@@ -1,8 +1,10 @@
 import { IExecuteFunctions, IHttpRequestOptions, INodeExecutionData } from 'n8n-workflow';
+import { baseUrl } from '../../baseUrl';
 
-const baseUrl = 'https://api.getarca.app/api/v1';
-
-export async function listLabels(this: IExecuteFunctions, index: number): Promise<INodeExecutionData> {
+export async function listLabels(
+	this: IExecuteFunctions,
+	index: number,
+): Promise<INodeExecutionData> {
 	const workspaceId = this.getNodeParameter('workspaceId', index) as number;
 
 	const options: IHttpRequestOptions = {
@@ -19,7 +21,10 @@ export async function listLabels(this: IExecuteFunctions, index: number): Promis
 	};
 }
 
-export async function createLabel(this: IExecuteFunctions, index: number): Promise<INodeExecutionData> {
+export async function createLabel(
+	this: IExecuteFunctions,
+	index: number,
+): Promise<INodeExecutionData> {
 	const workspaceId = this.getNodeParameter('workspaceId', index) as number;
 	const name = this.getNodeParameter('name', index) as string;
 	const color = this.getNodeParameter('color', index) as string;
@@ -46,7 +51,10 @@ export async function createLabel(this: IExecuteFunctions, index: number): Promi
 	};
 }
 
-export async function updateLabel(this: IExecuteFunctions, index: number): Promise<INodeExecutionData> {
+export async function updateLabel(
+	this: IExecuteFunctions,
+	index: number,
+): Promise<INodeExecutionData> {
 	const labelId = this.getNodeParameter('labelId', index) as number;
 	const name = this.getNodeParameter('name', index) as string;
 	const color = this.getNodeParameter('color', index) as string;
@@ -75,7 +83,10 @@ export async function updateLabel(this: IExecuteFunctions, index: number): Promi
 	};
 }
 
-export async function deleteLabel(this: IExecuteFunctions, index: number): Promise<INodeExecutionData> {
+export async function deleteLabel(
+	this: IExecuteFunctions,
+	index: number,
+): Promise<INodeExecutionData> {
 	const labelId = this.getNodeParameter('labelId', index) as number;
 
 	const options: IHttpRequestOptions = {

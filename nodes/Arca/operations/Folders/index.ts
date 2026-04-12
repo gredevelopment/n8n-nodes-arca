@@ -1,8 +1,10 @@
 import { IExecuteFunctions, IHttpRequestOptions, INodeExecutionData } from 'n8n-workflow';
+import { baseUrl } from '../../baseUrl';
 
-const baseUrl = 'https://api.getarca.app/api/v1';
-
-export async function listFolders(this: IExecuteFunctions, index: number): Promise<INodeExecutionData> {
+export async function listFolders(
+	this: IExecuteFunctions,
+	index: number,
+): Promise<INodeExecutionData> {
 	const workspaceId = this.getNodeParameter('workspaceId', index) as number;
 
 	const options: IHttpRequestOptions = {
@@ -19,7 +21,10 @@ export async function listFolders(this: IExecuteFunctions, index: number): Promi
 	};
 }
 
-export async function createFolder(this: IExecuteFunctions, index: number): Promise<INodeExecutionData> {
+export async function createFolder(
+	this: IExecuteFunctions,
+	index: number,
+): Promise<INodeExecutionData> {
 	const workspaceId = this.getNodeParameter('workspaceId', index) as number;
 	const name = this.getNodeParameter('name', index) as string;
 	const icon = this.getNodeParameter('icon', index) as string;
@@ -50,7 +55,10 @@ export async function createFolder(this: IExecuteFunctions, index: number): Prom
 	};
 }
 
-export async function updateFolder(this: IExecuteFunctions, index: number): Promise<INodeExecutionData> {
+export async function updateFolder(
+	this: IExecuteFunctions,
+	index: number,
+): Promise<INodeExecutionData> {
 	const folderId = this.getNodeParameter('folderIdToModify', index) as number;
 	const name = this.getNodeParameter('name', index) as string;
 	const icon = this.getNodeParameter('icon', index) as string;
@@ -83,7 +91,10 @@ export async function updateFolder(this: IExecuteFunctions, index: number): Prom
 	};
 }
 
-export async function deleteFolder(this: IExecuteFunctions, index: number): Promise<INodeExecutionData> {
+export async function deleteFolder(
+	this: IExecuteFunctions,
+	index: number,
+): Promise<INodeExecutionData> {
 	const folderId = this.getNodeParameter('folderIdToModify', index) as number;
 
 	const options: IHttpRequestOptions = {

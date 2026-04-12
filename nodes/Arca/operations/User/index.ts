@@ -1,8 +1,10 @@
 import { IExecuteFunctions, IHttpRequestOptions, INodeExecutionData } from 'n8n-workflow';
+import { baseUrl } from '../../baseUrl';
 
-const baseUrl = 'https://api.getarca.app/api/v1';
-
-export async function getCurrentUser(this: IExecuteFunctions, index: number): Promise<INodeExecutionData> {
+export async function getCurrentUser(
+	this: IExecuteFunctions,
+	index: number,
+): Promise<INodeExecutionData> {
 	const options: IHttpRequestOptions = {
 		method: 'GET',
 		url: `${baseUrl}/me`,

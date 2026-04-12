@@ -4,8 +4,7 @@ import {
 	INodeExecutionData,
 	IDataObject,
 } from 'n8n-workflow';
-
-const baseUrl = 'https://api.getarca.app/api/v1';
+import { baseUrl } from '../../baseUrl';
 
 export async function listStatuses(
 	this: IExecuteFunctions,
