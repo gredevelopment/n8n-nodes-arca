@@ -6,6 +6,11 @@ export const statusesOperations: INodeProperties[] = [
 		name: 'operation',
 		type: 'options',
 		noDataExpression: true,
+		displayOptions: {
+			show: {
+				resource: ['status'],
+			},
+		},
 		options: [
 			{
 				name: 'Create Status',

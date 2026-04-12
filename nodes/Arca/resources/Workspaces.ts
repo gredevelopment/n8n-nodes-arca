@@ -6,6 +6,11 @@ export const workspacesOperations: INodeProperties[] = [
 		name: 'operation',
 		type: 'options',
 		noDataExpression: true,
+		displayOptions: {
+			show: {
+				resource: ['workspace'],
+			},
+		},
 		options: [
 			{
 				name: 'Get Workspace',

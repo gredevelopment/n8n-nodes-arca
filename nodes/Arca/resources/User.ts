@@ -6,6 +6,11 @@ export const userOperations: INodeProperties[] = [
 		name: 'operation',
 		type: 'options',
 		noDataExpression: true,
+		displayOptions: {
+			show: {
+				resource: ['user'],
+			},
+		},
 		options: [
 			{
 				name: 'Get Current User',

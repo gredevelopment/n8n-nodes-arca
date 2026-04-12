@@ -6,6 +6,11 @@ export const listsOperations: INodeProperties[] = [
 		name: 'operation',
 		type: 'options',
 		noDataExpression: true,
+		displayOptions: {
+			show: {
+				resource: ['list'],
+			},
+		},
 		options: [
 			{
 				name: 'Create List',

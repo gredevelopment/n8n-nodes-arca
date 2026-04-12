@@ -1,5 +1,5 @@
 {
-	"node": "n8n-nodes-base.Arca",
+	"node": "n8n-nodes-arca.Arca",
 	"nodeVersion": "1.0",
 	"codexVersion": "1.0",
 	"categories": ["Miscellaneous"],

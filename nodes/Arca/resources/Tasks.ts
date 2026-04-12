@@ -6,6 +6,11 @@ export const tasksOperations: INodeProperties[] = [
 		name: 'operation',
 		type: 'options',
 		noDataExpression: true,
+		displayOptions: {
+			show: {
+				resource: ['task'],
+			},
+		},
 		options: [
 			{
 				name: 'Create Task',

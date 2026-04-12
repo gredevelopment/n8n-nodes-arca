@@ -6,6 +6,11 @@ export const commentsOperations: INodeProperties[] = [
 		name: 'operation',
 		type: 'options',
 		noDataExpression: true,
+		displayOptions: {
+			show: {
+				resource: ['comment'],
+			},
+		},
 		options: [
 			{
 				name: 'Create Comment',

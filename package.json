@@ -12,12 +12,12 @@
 	"license": "MIT",
 	"homepage": "https://docs.getarca.app/",
 	"author": {
-		"name": "Arca",
+		"name": "Gre Development",
 		"email": "support@getarca.app"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/arca/n8n-nodes-arca.git"
+		"url": "https://github.com/gredevelopment/n8n-nodes-arca.git"
 	},
 	"main": "index.js",
 	"scripts": {

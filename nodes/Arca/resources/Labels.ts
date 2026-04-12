@@ -6,6 +6,11 @@ export const labelsOperations: INodeProperties[] = [
 		name: 'operation',
 		type: 'options',
 		noDataExpression: true,
+		displayOptions: {
+			show: {
+				resource: ['label'],
+			},
+		},
 		options: [
 			{
 				name: 'Create Label',

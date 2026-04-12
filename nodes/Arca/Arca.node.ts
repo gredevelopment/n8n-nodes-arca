@@ -59,7 +59,7 @@ export class Arca implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Arca',
 		name: 'arca',
-		icon: 'fa:server',
+		icon: 'file:./arca.svg',
 		group: ['transform'],
 		version: 1,
 		subtitle:

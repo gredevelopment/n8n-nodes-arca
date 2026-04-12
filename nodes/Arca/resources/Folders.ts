@@ -6,6 +6,11 @@ export const foldersOperations: INodeProperties[] = [
 		name: 'operation',
 		type: 'options',
 		noDataExpression: true,
+		displayOptions: {
+			show: {
+				resource: ['folder'],
+			},
+		},
 		options: [
 			{
 				name: 'Create Folder',
