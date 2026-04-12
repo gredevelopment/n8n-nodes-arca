@@ -131,7 +131,7 @@ export class Arca implements INodeType {
 					} else {
 						throw new NodeOperationError(this.getNode(), `Unknown user operation: ${operation}`);
 					}
-				} else if (resource === 'workspaces') {
+				} else if (resource === 'workspace') {
 					if (operation === 'listWorkspaces') {
 						result = await listWorkspaces.call(this, i);
 					} else if (operation === 'getWorkspace') {
@@ -141,10 +141,10 @@ export class Arca implements INodeType {
 					} else {
 						throw new NodeOperationError(
 							this.getNode(),
-							`Unknown workspaces operation: ${operation}`,
+							`Unknown workspace operation: ${operation}`,
 						);
 					}
-				} else if (resource === 'folders') {
+				} else if (resource === 'folder') {
 					if (operation === 'listFolders') {
 						result = await listFolders.call(this, i);
 					} else if (operation === 'createFolder') {
@@ -154,9 +154,9 @@ export class Arca implements INodeType {
 					} else if (operation === 'deleteFolder') {
 						result = await deleteFolder.call(this, i);
 					} else {
-						throw new NodeOperationError(this.getNode(), `Unknown folders operation: ${operation}`);
+						throw new NodeOperationError(this.getNode(), `Unknown folder operation: ${operation}`);
 					}
-				} else if (resource === 'lists') {
+				} else if (resource === 'list') {
 					if (operation === 'listLists') {
 						result = await listLists.call(this, i);
 					} else if (operation === 'createList') {
@@ -166,9 +166,9 @@ export class Arca implements INodeType {
 					} else if (operation === 'deleteList') {
 						result = await deleteList.call(this, i);
 					} else {
-						throw new NodeOperationError(this.getNode(), `Unknown lists operation: ${operation}`);
+						throw new NodeOperationError(this.getNode(), `Unknown list operation: ${operation}`);
 					}
-				} else if (resource === 'tasks') {
+				} else if (resource === 'task') {
 					if (operation === 'listTasks') {
 						result = await listTasks.call(this, i);
 					} else if (operation === 'getTask') {
@@ -180,9 +180,9 @@ export class Arca implements INodeType {
 					} else if (operation === 'deleteTask') {
 						result = await deleteTask.call(this, i);
 					} else {
-						throw new NodeOperationError(this.getNode(), `Unknown tasks operation: ${operation}`);
+						throw new NodeOperationError(this.getNode(), `Unknown task operation: ${operation}`);
 					}
-				} else if (resource === 'statuses') {
+				} else if (resource === 'status') {
 					if (operation === 'listStatuses') {
 						result = await listStatuses.call(this, i);
 					} else if (operation === 'createStatus') {
@@ -194,10 +194,10 @@ export class Arca implements INodeType {
 					} else {
 						throw new NodeOperationError(
 							this.getNode(),
-							`Unknown statuses operation: ${operation}`,
+							`Unknown status operation: ${operation}`,
 						);
 					}
-				} else if (resource === 'labels') {
+				} else if (resource === 'label') {
 					if (operation === 'listLabels') {
 						result = await listLabels.call(this, i);
 					} else if (operation === 'createLabel') {
@@ -207,9 +207,9 @@ export class Arca implements INodeType {
 					} else if (operation === 'deleteLabel') {
 						result = await deleteLabel.call(this, i);
 					} else {
-						throw new NodeOperationError(this.getNode(), `Unknown labels operation: ${operation}`);
+						throw new NodeOperationError(this.getNode(), `Unknown label operation: ${operation}`);
 					}
-				} else if (resource === 'comments') {
+				} else if (resource === 'comment') {
 					if (operation === 'listComments') {
 						result = await listComments.call(this, i);
 					} else if (operation === 'createComment') {
@@ -217,7 +217,7 @@ export class Arca implements INodeType {
 					} else {
 						throw new NodeOperationError(
 							this.getNode(),
-							`Unknown comments operation: ${operation}`,
+							`Unknown comment operation: ${operation}`,
 						);
 					}
 				} else {
