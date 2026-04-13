@@ -192,10 +192,7 @@ export class Arca implements INodeType {
 					} else if (operation === 'deleteStatus') {
 						result = await deleteStatus.call(this, i);
 					} else {
-						throw new NodeOperationError(
-							this.getNode(),
-							`Unknown status operation: ${operation}`,
-						);
+						throw new NodeOperationError(this.getNode(), `Unknown status operation: ${operation}`);
 					}
 				} else if (resource === 'label') {
 					if (operation === 'listLabels') {
@@ -215,10 +212,7 @@ export class Arca implements INodeType {
 					} else if (operation === 'createComment') {
 						result = await createComment.call(this, i);
 					} else {
-						throw new NodeOperationError(
-							this.getNode(),
-							`Unknown comment operation: ${operation}`,
-						);
+						throw new NodeOperationError(this.getNode(), `Unknown comment operation: ${operation}`);
 					}
 				} else {
 					throw new NodeOperationError(this.getNode(), `Unknown resource: ${resource}`);
