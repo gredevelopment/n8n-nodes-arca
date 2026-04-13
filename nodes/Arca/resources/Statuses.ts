@@ -98,11 +98,10 @@ export const statusesFields: INodeProperties[] = [
 		name: 'category',
 		type: 'options',
 		options: [
-			{ name: 'Active', value: 'active' },
-			{ name: 'Cancelled', value: 'cancelled' },
-			{ name: 'Completed', value: 'completed' },
-			{ name: 'Done', value: 'done' },
 			{ name: 'Pending', value: 'pending' },
+			{ name: 'In Progress', value: 'in_progress' },
+			{ name: 'Completed', value: 'completed' },
+			{ name: 'Cancelled', value: 'cancelled' },
 		],
 		default: 'pending',
 		displayOptions: {
@@ -111,7 +110,7 @@ export const statusesFields: INodeProperties[] = [
 				operation: ['createStatus', 'updateStatus'],
 			},
 		},
-		description: 'Status category',
+		description: 'Status category. Must be one of pending, in_progress, completed, or cancelled.',
 	},
 	{
 		displayName: 'Additional Fields',
