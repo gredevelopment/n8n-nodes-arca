@@ -1,4 +1,5 @@
 import { INodeProperties } from 'n8n-workflow';
+import { colorOptions } from './colors';
 
 export const labelsOperations: INodeProperties[] = [
 	{
@@ -43,29 +44,32 @@ export const labelsOperations: INodeProperties[] = [
 
 export const labelsFields: INodeProperties[] = [
 	{
-		displayName: 'Workspace ID',
+		displayName: 'Workspace Name or ID',
 		name: 'workspaceId',
-		type: 'number',
-		default: 0,
+		type: 'options',
+		default: '',
 		required: true,
 		typeOptions: {
-			minValue: 1,
+			loadOptionsMethod: 'getWorkspaces',
 		},
 		displayOptions: {
 			show: {
 				resource: ['label'],
-				operation: ['listLabels', 'createLabel'],
+				operation: ['listLabels', 'createLabel', 'updateLabel', 'deleteLabel'],
 			},
 		},
-		description: 'Workspace ID for label actions',
+		description:
+			'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
 	},
 	{
-		displayName: 'Label ID',
+		displayName: 'Label Name or ID',
 		name: 'labelId',
-		type: 'number',
-		default: 0,
+		type: 'options',
+		default: '',
+		required: true,
 		typeOptions: {
-			minValue: 1,
+			loadOptionsMethod: 'getLabels',
+			loadOptionsDependsOn: ['workspaceId'],
 		},
 		displayOptions: {
 			show: {
@@ -73,7 +77,8 @@ export const labelsFields: INodeProperties[] = [
 				operation: ['updateLabel', 'deleteLabel'],
 			},
 		},
-		description: 'ID of the label to modify or delete',
+		description:
+			'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
 	},
 	{
 		displayName: 'Name',
@@ -89,16 +94,26 @@ export const labelsFields: INodeProperties[] = [
 		description: 'Label name',
 	},
 	{
-		displayName: 'Color',
-		name: 'color',
-		type: 'color',
-		default: '',
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
 		displayOptions: {
 			show: {
 				resource: ['label'],
 				operation: ['createLabel', 'updateLabel'],
 			},
 		},
-		description: 'Label color',
+		options: [
+			{
+				displayName: 'Color',
+				name: 'color',
+				type: 'options',
+				options: colorOptions,
+				default: '',
+				description: 'Label color',
+			},
+		],
 	},
 ];

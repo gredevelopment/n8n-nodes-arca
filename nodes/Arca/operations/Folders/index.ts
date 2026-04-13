@@ -27,8 +27,10 @@ export async function createFolder(
 ): Promise<INodeExecutionData> {
 	const workspaceId = this.getNodeParameter('workspaceId', index) as number;
 	const name = this.getNodeParameter('name', index) as string;
-	const icon = this.getNodeParameter('icon', index) as string;
-	const color = this.getNodeParameter('color', index) as string;
+	const additionalFields = this.getNodeParameter('additionalFields', index, {}) as {
+		icon?: string;
+		color?: string;
+	};
 
 	const options: IHttpRequestOptions = {
 		method: 'POST',
@@ -40,11 +42,11 @@ export async function createFolder(
 		},
 	};
 
-	if (icon) {
-		options.body.icon = icon;
+	if (additionalFields.icon) {
+		options.body.icon = additionalFields.icon;
 	}
-	if (color) {
-		options.body.color = color;
+	if (additionalFields.color) {
+		options.body.color = additionalFields.color;
 	}
 
 	const response = await this.helpers.httpRequestWithAuthentication.call(this, 'arcaApi', options);
@@ -61,19 +63,21 @@ export async function updateFolder(
 ): Promise<INodeExecutionData> {
 	const folderId = this.getNodeParameter('folderIdToModify', index) as number;
 	const name = this.getNodeParameter('name', index) as string;
-	const icon = this.getNodeParameter('icon', index) as string;
-	const color = this.getNodeParameter('color', index) as string;
+	const additionalFields = this.getNodeParameter('additionalFields', index, {}) as {
+		icon?: string;
+		color?: string;
+	};
 
 	const body: { [key: string]: any } = {};
 
 	if (name) {
 		body.name = name;
 	}
-	if (icon) {
-		body.icon = icon;
+	if (additionalFields.icon) {
+		body.icon = additionalFields.icon;
 	}
-	if (color) {
-		body.color = color;
+	if (additionalFields.color) {
+		body.color = additionalFields.color;
 	}
 
 	const options: IHttpRequestOptions = {

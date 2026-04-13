@@ -7,12 +7,14 @@ export async function listTasks(
 ): Promise<INodeExecutionData> {
 	const workspaceId = this.getNodeParameter('workspaceId', index) as number;
 	const listId = this.getNodeParameter('listId', index) as number;
-	const page = this.getNodeParameter('page', index, 1) as number;
-	const limit = this.getNodeParameter('limit', index, 50) as number;
+	const additionalFields = this.getNodeParameter('additionalFields', index, {}) as {
+		page?: number;
+		limit?: number;
+	};
 
 	const qs: { [key: string]: any } = {
-		page,
-		limit,
+		page: additionalFields.page || 1,
+		limit: additionalFields.limit || 50,
 	};
 
 	if (listId) {
@@ -55,35 +57,35 @@ export async function createTask(
 	this: IExecuteFunctions,
 	index: number,
 ): Promise<INodeExecutionData> {
-	const workspaceId = this.getNodeParameter('workspaceId', index) as number;
 	const listId = this.getNodeParameter('listId', index) as number;
 	const title = this.getNodeParameter('title', index) as string;
-	const description = this.getNodeParameter('description', index) as string;
-	const priority = this.getNodeParameter('priority', index) as string;
-	const statusId = this.getNodeParameter('statusIdForTask', index) as number;
-	const dueDate = this.getNodeParameter('dueDate', index) as string;
-	const startDate = this.getNodeParameter('startDate', index) as string;
+	const additionalFields = this.getNodeParameter('additionalFields', index, {}) as {
+		description?: string;
+		priority?: string;
+		statusIdForTask?: number;
+		dueDate?: string;
+		startDate?: string;
+	};
 
 	const body: { [key: string]: any } = {
-		workspace_id: workspaceId,
 		list_id: listId,
 		title,
 	};
 
-	if (description) {
-		body.description = description;
+	if (additionalFields.description) {
+		body.description = additionalFields.description;
 	}
-	if (priority) {
-		body.priority = priority;
+	if (additionalFields.priority) {
+		body.priority = additionalFields.priority;
 	}
-	if (statusId) {
-		body.status_id = statusId;
+	if (additionalFields.statusIdForTask) {
+		body.status_id = additionalFields.statusIdForTask;
 	}
-	if (dueDate) {
-		body.due_date = dueDate;
+	if (additionalFields.dueDate) {
+		body.due_date = additionalFields.dueDate;
 	}
-	if (startDate) {
-		body.start_date = startDate;
+	if (additionalFields.startDate) {
+		body.start_date = additionalFields.startDate;
 	}
 
 	const options: IHttpRequestOptions = {
@@ -107,35 +109,37 @@ export async function updateTask(
 ): Promise<INodeExecutionData> {
 	const taskId = this.getNodeParameter('taskId', index) as number;
 	const title = this.getNodeParameter('title', index) as string;
-	const description = this.getNodeParameter('description', index) as string;
-	const priority = this.getNodeParameter('priority', index) as string;
-	const statusId = this.getNodeParameter('statusIdForTask', index) as number;
 	const listId = this.getNodeParameter('listId', index) as number;
-	const dueDate = this.getNodeParameter('dueDate', index) as string;
-	const startDate = this.getNodeParameter('startDate', index) as string;
+	const additionalFields = this.getNodeParameter('additionalFields', index, {}) as {
+		description?: string;
+		priority?: string;
+		statusIdForTask?: number;
+		dueDate?: string;
+		startDate?: string;
+	};
 
 	const body: { [key: string]: any } = {};
 
 	if (title) {
 		body.title = title;
 	}
-	if (description) {
-		body.description = description;
+	if (additionalFields.description) {
+		body.description = additionalFields.description;
 	}
-	if (priority) {
-		body.priority = priority;
+	if (additionalFields.priority) {
+		body.priority = additionalFields.priority;
 	}
-	if (statusId) {
-		body.status_id = statusId;
+	if (additionalFields.statusIdForTask) {
+		body.status_id = additionalFields.statusIdForTask;
 	}
 	if (listId) {
 		body.list_id = listId;
 	}
-	if (dueDate) {
-		body.due_date = dueDate;
+	if (additionalFields.dueDate) {
+		body.due_date = additionalFields.dueDate;
 	}
-	if (startDate) {
-		body.start_date = startDate;
+	if (additionalFields.startDate) {
+		body.start_date = additionalFields.startDate;
 	}
 
 	const options: IHttpRequestOptions = {

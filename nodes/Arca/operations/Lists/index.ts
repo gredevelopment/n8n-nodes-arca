@@ -26,10 +26,13 @@ export async function createList(
 	index: number,
 ): Promise<INodeExecutionData> {
 	const workspaceId = this.getNodeParameter('workspaceId', index) as number;
-	const folderId = this.getNodeParameter('folderId', index) as number;
 	const name = this.getNodeParameter('name', index) as string;
-	const icon = this.getNodeParameter('icon', index) as string;
-	const color = this.getNodeParameter('color', index) as string;
+	const additionalFields = this.getNodeParameter('additionalFields', index, {}) as {
+		folderId?: number;
+		icon?: string;
+		color?: string;
+	};
+	const folderId = additionalFields.folderId as number | undefined;
 
 	const options: IHttpRequestOptions = {
 		method: 'POST',
@@ -37,16 +40,18 @@ export async function createList(
 		json: true,
 		body: {
 			workspace_id: workspaceId,
-			folder_id: folderId,
 			name,
 		},
 	};
 
-	if (icon) {
-		options.body.icon = icon;
+	if (folderId) {
+		options.body.folder_id = folderId;
 	}
-	if (color) {
-		options.body.color = color;
+	if (additionalFields.icon) {
+		options.body.icon = additionalFields.icon;
+	}
+	if (additionalFields.color) {
+		options.body.color = additionalFields.color;
 	}
 
 	const response = await this.helpers.httpRequestWithAuthentication.call(this, 'arcaApi', options);
@@ -62,21 +67,24 @@ export async function updateList(
 	index: number,
 ): Promise<INodeExecutionData> {
 	const listId = this.getNodeParameter('listIdToModify', index) as number;
-	const folderId = this.getNodeParameter('folderId', index) as number;
 	const name = this.getNodeParameter('name', index) as string;
-	const icon = this.getNodeParameter('icon', index) as string;
-	const color = this.getNodeParameter('color', index) as string;
+	const additionalFields = this.getNodeParameter('additionalFields', index, {}) as {
+		folderId?: number;
+		icon?: string;
+		color?: string;
+	};
+	const folderId = additionalFields.folderId as number | undefined;
 
 	const body: { [key: string]: any } = {};
 
 	if (name) {
 		body.name = name;
 	}
-	if (icon) {
-		body.icon = icon;
+	if (additionalFields.icon) {
+		body.icon = additionalFields.icon;
 	}
-	if (color) {
-		body.color = color;
+	if (additionalFields.color) {
+		body.color = additionalFields.color;
 	}
 	if (folderId) {
 		body.folder_id = folderId;

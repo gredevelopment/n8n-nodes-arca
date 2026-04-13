@@ -37,20 +37,18 @@ export const workspacesOperations: INodeProperties[] = [
 
 export const workspacesFields: INodeProperties[] = [
 	{
-		displayName: 'Workspace ID',
+		displayName: 'Workspace',
 		name: 'workspaceId',
-		type: 'number',
-		default: 0,
+		type: 'options',
+		default: '',
 		required: true,
-		typeOptions: {
-			minValue: 1,
-		},
+		loadOptionsMethod: 'getWorkspaces',
 		displayOptions: {
 			show: {
 				resource: ['workspace'],
 				operation: ['getWorkspace', 'listWorkspaceMembers'],
 			},
 		},
-		description: 'The numeric workspace ID',
+		description: 'Select the workspace',
 	},
 ];

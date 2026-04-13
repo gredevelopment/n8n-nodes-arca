@@ -49,30 +49,28 @@ export const tasksOperations: INodeProperties[] = [
 
 export const tasksFields: INodeProperties[] = [
 	{
-		displayName: 'Workspace ID',
+		displayName: 'Workspace Name or ID',
 		name: 'workspaceId',
-		type: 'number',
-		default: 0,
+		type: 'options',
+		default: '',
 		required: true,
 		typeOptions: {
-			minValue: 1,
+			loadOptionsMethod: 'getWorkspaces',
 		},
 		displayOptions: {
 			show: {
 				resource: ['task'],
-				operation: ['listTasks', 'createTask'],
+				operation: ['listTasks', 'createTask', 'updateTask'],
 			},
 		},
-		description: 'Workspace ID for task operations',
+		description:
+			'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
 	},
 	{
 		displayName: 'Task ID',
 		name: 'taskId',
 		type: 'number',
-		default: 0,
-		typeOptions: {
-			minValue: 1,
-		},
+		default: undefined,
 		displayOptions: {
 			show: {
 				resource: ['task'],
@@ -82,12 +80,13 @@ export const tasksFields: INodeProperties[] = [
 		description: 'The numeric task ID',
 	},
 	{
-		displayName: 'List ID',
+		displayName: 'List Name or ID',
 		name: 'listId',
-		type: 'number',
-		default: 0,
+		type: 'options',
+		default: '',
 		typeOptions: {
-			minValue: 1,
+			loadOptionsMethod: 'getLists',
+			loadOptionsDependsOn: ['workspaceId'],
 		},
 		displayOptions: {
 			show: {
@@ -95,7 +94,8 @@ export const tasksFields: INodeProperties[] = [
 				operation: ['listTasks', 'createTask', 'updateTask'],
 			},
 		},
-		description: 'List ID for task creation or filtering',
+		description:
+			'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
 	},
 	{
 		displayName: 'Title',
@@ -111,110 +111,97 @@ export const tasksFields: INodeProperties[] = [
 		description: 'Task title',
 	},
 	{
-		displayName: 'Description',
-		name: 'description',
-		type: 'string',
-		default: '',
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
 		displayOptions: {
 			show: {
 				resource: ['task'],
 				operation: ['createTask', 'updateTask'],
 			},
 		},
-		description: 'Task description as HTML',
-	},
-	{
-		displayName: 'Priority',
-		name: 'priority',
-		type: 'options',
 		options: [
-			{ name: 'High', value: 'high' },
-			{ name: 'Low', value: 'low' },
-			{ name: 'Medium', value: 'medium' },
-			{ name: 'None', value: 'none' },
-			{ name: 'Urgent', value: 'urgent' },
+			{
+				displayName: 'Description',
+				name: 'description',
+				type: 'string',
+				default: '',
+				description: 'Task description as HTML',
+			},
+			{
+				displayName: 'Due Date',
+				name: 'dueDate',
+				type: 'string',
+				default: '',
+				description: 'Due date in ISO 8601 format',
+			},
+			{
+				displayName: 'Priority',
+				name: 'priority',
+				type: 'options',
+				options: [
+					{ name: 'High', value: 'high' },
+					{ name: 'Low', value: 'low' },
+					{ name: 'Medium', value: 'medium' },
+					{ name: 'None', value: 'none' },
+					{ name: 'Urgent', value: 'urgent' },
+				],
+				default: 'none',
+				description: 'Task priority',
+			},
+			{
+				displayName: 'Start Date',
+				name: 'startDate',
+				type: 'string',
+				default: '',
+				description: 'Start date in ISO 8601 format',
+			},
+			{
+				displayName: 'Status Name or ID',
+				name: 'statusIdForTask',
+				type: 'options',
+				default: '',
+				typeOptions: {
+					loadOptionsMethod: 'getStatuses',
+					loadOptionsDependsOn: ['workspaceId'],
+				},
+				description:
+					'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
+			},
 		],
-		default: 'none',
-		displayOptions: {
-			show: {
-				resource: ['task'],
-				operation: ['createTask', 'updateTask'],
-			},
-		},
-		description: 'Task priority',
 	},
 	{
-		displayName: 'Status ID',
-		name: 'statusIdForTask',
-		type: 'number',
-		default: 0,
-		typeOptions: {
-			minValue: 1,
-		},
-		displayOptions: {
-			show: {
-				resource: ['task'],
-				operation: ['createTask', 'updateTask'],
-			},
-		},
-		description: 'Status ID to assign to the task',
-	},
-	{
-		displayName: 'Due Date',
-		name: 'dueDate',
-		type: 'string',
-		default: '',
-		displayOptions: {
-			show: {
-				resource: ['task'],
-				operation: ['createTask', 'updateTask'],
-			},
-		},
-		description: 'Due date in ISO 8601 format',
-	},
-	{
-		displayName: 'Start Date',
-		name: 'startDate',
-		type: 'string',
-		default: '',
-		displayOptions: {
-			show: {
-				resource: ['task'],
-				operation: ['createTask', 'updateTask'],
-			},
-		},
-		description: 'Start date in ISO 8601 format',
-	},
-	{
-		displayName: 'Page',
-		name: 'page',
-		type: 'number',
-		default: 1,
-		typeOptions: {
-			minValue: 1,
-		},
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
 		displayOptions: {
 			show: {
 				resource: ['task'],
 				operation: ['listTasks'],
 			},
 		},
-		description: 'Page number for task listing',
-	},
-	{
-		displayName: 'Limit',
-		name: 'limit',
-		type: 'number',
-		default: 50,
-		typeOptions: {
-			minValue: 1,
-		},
-		displayOptions: {
-			show: {
-				resource: ['task'],
-				operation: ['listTasks'],
+		options: [
+			{
+				displayName: 'Page',
+				name: 'page',
+				type: 'number',
+				default: '',
+				description: 'Page number for task listing',
 			},
-		},
-		description: 'Max number of results to return',
+			{
+				displayName: 'Limit',
+				name: 'limit',
+				type: 'number',
+				default: 50,
+				typeOptions: {
+					minValue: 1,
+				},
+				description: 'Max number of results to return',
+			},
+		],
 	},
 ];

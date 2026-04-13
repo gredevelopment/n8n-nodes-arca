@@ -34,11 +34,8 @@ export const commentsFields: INodeProperties[] = [
 		displayName: 'Task ID',
 		name: 'taskId',
 		type: 'number',
-		default: 0,
+		default: undefined,
 		required: true,
-		typeOptions: {
-			minValue: 1,
-		},
 		displayOptions: {
 			show: {
 				resource: ['comment'],

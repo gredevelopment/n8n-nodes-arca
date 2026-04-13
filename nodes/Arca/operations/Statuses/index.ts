@@ -33,8 +33,11 @@ export async function createStatus(
 	const workspaceId = this.getNodeParameter('workspaceId', index) as number;
 	const name = this.getNodeParameter('name', index) as string;
 	const category = this.getNodeParameter('category', index) as string;
-	const icon = this.getNodeParameter('icon', index) as string;
-	const color = this.getNodeParameter('color', index) as string;
+	const additionalFields = this.getNodeParameter('additionalFields', index, {}) as {
+		icon?: string;
+		color?: string;
+		position?: number;
+	};
 
 	const options: IHttpRequestOptions = {
 		method: 'POST',
@@ -47,11 +50,11 @@ export async function createStatus(
 		},
 	};
 
-	if (icon) {
-		options.body.icon = icon;
+	if (additionalFields.icon) {
+		options.body.icon = additionalFields.icon;
 	}
-	if (color) {
-		options.body.color = color;
+	if (additionalFields.color) {
+		options.body.color = additionalFields.color;
 	}
 
 	const response = await this.helpers.httpRequestWithAuthentication.call(this, 'arcaApi', options);
@@ -69,9 +72,11 @@ export async function updateStatus(
 	const statusId = this.getNodeParameter('statusId', index) as number;
 	const name = this.getNodeParameter('name', index) as string;
 	const category = this.getNodeParameter('category', index) as string;
-	const icon = this.getNodeParameter('icon', index) as string;
-	const color = this.getNodeParameter('color', index) as string;
-	const position = this.getNodeParameter('position', index) as number;
+	const additionalFields = this.getNodeParameter('additionalFields', index, {}) as {
+		icon?: string;
+		color?: string;
+		position?: number;
+	};
 
 	const body: { [key: string]: any } = {};
 
@@ -81,14 +86,14 @@ export async function updateStatus(
 	if (category) {
 		body.category = category;
 	}
-	if (icon) {
-		body.icon = icon;
+	if (additionalFields.icon) {
+		body.icon = additionalFields.icon;
 	}
-	if (color) {
-		body.color = color;
+	if (additionalFields.color) {
+		body.color = additionalFields.color;
 	}
-	if (position) {
-		body.position = position;
+	if (additionalFields.position) {
+		body.position = additionalFields.position;
 	}
 
 	const options: IHttpRequestOptions = {
@@ -111,11 +116,13 @@ export async function deleteStatus(
 	index: number,
 ): Promise<INodeExecutionData> {
 	const statusId = this.getNodeParameter('statusId', index) as number;
-	const reassignTo = this.getNodeParameter('reassignTo', index) as number;
+	const additionalFields = this.getNodeParameter('additionalFields', index, {}) as {
+		reassignTo?: number;
+	};
 	const qs: IDataObject = {};
 
-	if (reassignTo) {
-		qs.reassign_to = reassignTo;
+	if (additionalFields.reassignTo) {
+		qs.reassign_to = additionalFields.reassignTo;
 	}
 
 	const options: IHttpRequestOptions = {

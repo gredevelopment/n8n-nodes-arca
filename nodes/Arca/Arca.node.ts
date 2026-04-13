@@ -1,10 +1,96 @@
 ﻿import {
 	IExecuteFunctions,
+	ILoadOptionsFunctions,
 	INodeExecutionData,
+	INodePropertyOptions,
 	INodeType,
 	INodeTypeDescription,
+	IHttpRequestOptions,
 	NodeOperationError,
 } from 'n8n-workflow';
+import { baseUrl } from './baseUrl';
+
+async function getWorkspaces(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
+	const options: IHttpRequestOptions = {
+		method: 'GET',
+		url: `${baseUrl}/workspaces`,
+		json: true,
+	};
+
+	const response = await this.helpers.httpRequestWithAuthentication.call(this, 'arcaApi', options);
+
+	return Array.isArray(response)
+		? response.map((workspace: any) => ({ name: workspace.name, value: workspace.id }))
+		: [];
+}
+
+async function getFolders(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
+	const workspaceId = this.getNodeParameter('workspaceId', undefined) as number | undefined;
+	if (!workspaceId) return [];
+
+	const options: IHttpRequestOptions = {
+		method: 'GET',
+		url: `${baseUrl}/workspaces/${workspaceId}/folders`,
+		json: true,
+	};
+
+	const response = await this.helpers.httpRequestWithAuthentication.call(this, 'arcaApi', options);
+
+	return Array.isArray(response)
+		? response.map((folder: any) => ({ name: folder.name, value: folder.id }))
+		: [];
+}
+
+async function getLists(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
+	const workspaceId = this.getNodeParameter('workspaceId', undefined) as number | undefined;
+	if (!workspaceId) return [];
+
+	const options: IHttpRequestOptions = {
+		method: 'GET',
+		url: `${baseUrl}/workspaces/${workspaceId}/lists`,
+		json: true,
+	};
+
+	const response = await this.helpers.httpRequestWithAuthentication.call(this, 'arcaApi', options);
+
+	return Array.isArray(response)
+		? response.map((list: any) => ({ name: list.name, value: list.id }))
+		: [];
+}
+
+async function getStatuses(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
+	const workspaceId = this.getNodeParameter('workspaceId', undefined) as number | undefined;
+	if (!workspaceId) return [];
+
+	const options: IHttpRequestOptions = {
+		method: 'GET',
+		url: `${baseUrl}/workspaces/${workspaceId}/statuses`,
+		json: true,
+	};
+
+	const response = await this.helpers.httpRequestWithAuthentication.call(this, 'arcaApi', options);
+
+	return Array.isArray(response)
+		? response.map((status: any) => ({ name: status.name, value: status.id }))
+		: [];
+}
+
+async function getLabels(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
+	const workspaceId = this.getNodeParameter('workspaceId', undefined) as number | undefined;
+	if (!workspaceId) return [];
+
+	const options: IHttpRequestOptions = {
+		method: 'GET',
+		url: `${baseUrl}/workspaces/${workspaceId}/labels`,
+		json: true,
+	};
+
+	const response = await this.helpers.httpRequestWithAuthentication.call(this, 'arcaApi', options);
+
+	return Array.isArray(response)
+		? response.map((label: any) => ({ name: label.name, value: label.id }))
+		: [];
+}
 
 import {
 	userOperations,
@@ -113,6 +199,16 @@ export class Arca implements INodeType {
 			...labelsFields,
 			...commentsFields,
 		],
+	};
+
+	methods = {
+		loadOptions: {
+			getWorkspaces,
+			getFolders,
+			getLists,
+			getStatuses,
+			getLabels,
+		},
 	};
 
 	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {

@@ -1,4 +1,5 @@
 import { INodeProperties } from 'n8n-workflow';
+import { colorOptions } from './colors';
 
 export const listsOperations: INodeProperties[] = [
 	{
@@ -43,45 +44,32 @@ export const listsOperations: INodeProperties[] = [
 
 export const listsFields: INodeProperties[] = [
 	{
-		displayName: 'Workspace ID',
+		displayName: 'Workspace Name or ID',
 		name: 'workspaceId',
-		type: 'number',
-		default: 0,
+		type: 'options',
+		default: '',
 		required: true,
 		typeOptions: {
-			minValue: 1,
+			loadOptionsMethod: 'getWorkspaces',
 		},
 		displayOptions: {
 			show: {
 				resource: ['list'],
-				operation: ['listLists', 'createList'],
+				operation: ['listLists', 'createList', 'updateList', 'deleteList'],
 			},
 		},
-		description: 'Workspace ID for list actions',
+		description:
+			'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
 	},
 	{
-		displayName: 'Folder ID',
-		name: 'folderId',
-		type: 'number',
-		default: 0,
-		typeOptions: {
-			minValue: 1,
-		},
-		displayOptions: {
-			show: {
-				resource: ['list'],
-				operation: ['createList', 'updateList'],
-			},
-		},
-		description: 'Folder ID the list belongs to',
-	},
-	{
-		displayName: 'List ID',
+		displayName: 'List Name or ID',
 		name: 'listIdToModify',
-		type: 'number',
-		default: 0,
+		type: 'options',
+		default: '',
+		required: true,
 		typeOptions: {
-			minValue: 1,
+			loadOptionsMethod: 'getLists',
+			loadOptionsDependsOn: ['workspaceId'],
 		},
 		displayOptions: {
 			show: {
@@ -89,7 +77,8 @@ export const listsFields: INodeProperties[] = [
 				operation: ['updateList', 'deleteList'],
 			},
 		},
-		description: 'The ID of the list to modify or delete',
+		description:
+			'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
 	},
 	{
 		displayName: 'Name',
@@ -105,29 +94,45 @@ export const listsFields: INodeProperties[] = [
 		description: 'List name',
 	},
 	{
-		displayName: 'Icon',
-		name: 'icon',
-		type: 'string',
-		default: '',
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
 		displayOptions: {
 			show: {
 				resource: ['list'],
 				operation: ['createList', 'updateList'],
 			},
 		},
-		description: 'Optional icon slug for the list',
-	},
-	{
-		displayName: 'Color',
-		name: 'color',
-		type: 'color',
-		default: '',
-		displayOptions: {
-			show: {
-				resource: ['list'],
-				operation: ['createList', 'updateList'],
+		options: [
+			{
+				displayName: 'Folder Name or ID',
+				name: 'folderId',
+				type: 'options',
+				default: '',
+				typeOptions: {
+					loadOptionsMethod: 'getFolders',
+					loadOptionsDependsOn: ['workspaceId'],
+				},
+				description:
+					'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
 			},
-		},
-		description: 'Optional list color',
+			{
+				displayName: 'Icon',
+				name: 'icon',
+				type: 'string',
+				default: '',
+				description: 'Icon slug for the list',
+			},
+			{
+				displayName: 'Color',
+				name: 'color',
+				type: 'options',
+				options: colorOptions,
+				default: '',
+				description: 'List color',
+			},
+		],
 	},
 ];

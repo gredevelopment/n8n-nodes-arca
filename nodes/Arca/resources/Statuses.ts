@@ -1,4 +1,5 @@
 import { INodeProperties } from 'n8n-workflow';
+import { colorOptions } from './colors';
 
 export const statusesOperations: INodeProperties[] = [
 	{
@@ -43,29 +44,32 @@ export const statusesOperations: INodeProperties[] = [
 
 export const statusesFields: INodeProperties[] = [
 	{
-		displayName: 'Workspace ID',
+		displayName: 'Workspace Name or ID',
 		name: 'workspaceId',
-		type: 'number',
-		default: 0,
+		type: 'options',
+		default: '',
 		required: true,
 		typeOptions: {
-			minValue: 1,
+			loadOptionsMethod: 'getWorkspaces',
 		},
 		displayOptions: {
 			show: {
 				resource: ['status'],
-				operation: ['listStatuses', 'createStatus'],
+				operation: ['listStatuses', 'createStatus', 'updateStatus', 'deleteStatus'],
 			},
 		},
-		description: 'Workspace ID for status actions',
+		description:
+			'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
 	},
 	{
-		displayName: 'Status ID',
+		displayName: 'Status Name or ID',
 		name: 'statusId',
-		type: 'number',
-		default: 0,
+		type: 'options',
+		default: '',
+		required: true,
 		typeOptions: {
-			minValue: 1,
+			loadOptionsMethod: 'getStatuses',
+			loadOptionsDependsOn: ['workspaceId'],
 		},
 		displayOptions: {
 			show: {
@@ -73,7 +77,8 @@ export const statusesFields: INodeProperties[] = [
 				operation: ['updateStatus', 'deleteStatus'],
 			},
 		},
-		description: 'The ID of the status to modify or delete',
+		description:
+			'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
 	},
 	{
 		displayName: 'Name',
@@ -109,61 +114,67 @@ export const statusesFields: INodeProperties[] = [
 		description: 'Status category',
 	},
 	{
-		displayName: 'Icon',
-		name: 'icon',
-		type: 'string',
-		default: '',
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
 		displayOptions: {
 			show: {
 				resource: ['status'],
 				operation: ['createStatus', 'updateStatus'],
 			},
 		},
-		description: 'Optional status icon slug',
-	},
-	{
-		displayName: 'Color',
-		name: 'color',
-		type: 'color',
-		default: '',
-		displayOptions: {
-			show: {
-				resource: ['status'],
-				operation: ['createStatus', 'updateStatus'],
+		options: [
+			{
+				displayName: 'Icon',
+				name: 'icon',
+				type: 'string',
+				default: '',
+				description: 'Status icon slug',
 			},
-		},
-		description: 'Optional status color',
-	},
-	{
-		displayName: 'Position',
-		name: 'position',
-		type: 'number',
-		default: 1,
-		typeOptions: {
-			minValue: 1,
-		},
-		displayOptions: {
-			show: {
-				resource: ['status'],
-				operation: ['updateStatus'],
+			{
+				displayName: 'Color',
+				name: 'color',
+				type: 'options',
+				options: colorOptions,
+				default: '',
+				description: 'Status color',
 			},
-		},
-		description: 'Status position for ordering',
+			{
+				displayName: 'Position',
+				name: 'position',
+				type: 'number',
+				default: undefined,
+				description: 'Status position for ordering',
+			},
+		],
 	},
 	{
-		displayName: 'Reassign To Status ID',
-		name: 'reassignTo',
-		type: 'number',
-		default: 0,
-		typeOptions: {
-			minValue: 1,
-		},
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
 		displayOptions: {
 			show: {
 				resource: ['status'],
 				operation: ['deleteStatus'],
 			},
 		},
-		description: 'Status ID to reassign tasks to before deletion',
+		options: [
+			{
+				displayName: 'Reassign To Status Name or ID',
+				name: 'reassignTo',
+				type: 'options',
+				default: '',
+				typeOptions: {
+					loadOptionsMethod: 'getStatuses',
+					loadOptionsDependsOn: ['workspaceId'],
+				},
+				description:
+					'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
+			},
+		],
 	},
 ];

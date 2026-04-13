@@ -27,7 +27,9 @@ export async function createLabel(
 ): Promise<INodeExecutionData> {
 	const workspaceId = this.getNodeParameter('workspaceId', index) as number;
 	const name = this.getNodeParameter('name', index) as string;
-	const color = this.getNodeParameter('color', index) as string;
+	const additionalFields = this.getNodeParameter('additionalFields', index, {}) as {
+		color?: string;
+	};
 
 	const options: IHttpRequestOptions = {
 		method: 'POST',
@@ -39,8 +41,8 @@ export async function createLabel(
 		},
 	};
 
-	if (color) {
-		options.body.color = color;
+	if (additionalFields.color) {
+		options.body.color = additionalFields.color;
 	}
 
 	const response = await this.helpers.httpRequestWithAuthentication.call(this, 'arcaApi', options);
@@ -57,15 +59,17 @@ export async function updateLabel(
 ): Promise<INodeExecutionData> {
 	const labelId = this.getNodeParameter('labelId', index) as number;
 	const name = this.getNodeParameter('name', index) as string;
-	const color = this.getNodeParameter('color', index) as string;
+	const additionalFields = this.getNodeParameter('additionalFields', index, {}) as {
+		color?: string;
+	};
 
 	const body: { [key: string]: any } = {};
 
 	if (name) {
 		body.name = name;
 	}
-	if (color) {
-		body.color = color;
+	if (additionalFields.color) {
+		body.color = additionalFields.color;
 	}
 
 	const options: IHttpRequestOptions = {

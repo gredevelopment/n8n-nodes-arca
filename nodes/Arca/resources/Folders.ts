@@ -1,4 +1,5 @@
 import { INodeProperties } from 'n8n-workflow';
+import { colorOptions } from './colors';
 
 export const foldersOperations: INodeProperties[] = [
 	{
@@ -43,29 +44,32 @@ export const foldersOperations: INodeProperties[] = [
 
 export const foldersFields: INodeProperties[] = [
 	{
-		displayName: 'Workspace ID',
+		displayName: 'Workspace Name or ID',
 		name: 'workspaceId',
-		type: 'number',
-		default: 0,
+		type: 'options',
+		default: '',
 		required: true,
 		typeOptions: {
-			minValue: 1,
+			loadOptionsMethod: 'getWorkspaces',
 		},
 		displayOptions: {
 			show: {
 				resource: ['folder'],
-				operation: ['listFolders', 'createFolder'],
+				operation: ['listFolders', 'createFolder', 'updateFolder', 'deleteFolder'],
 			},
 		},
-		description: 'The workspace ID for the folder action',
+		description:
+			'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
 	},
 	{
-		displayName: 'Folder ID',
+		displayName: 'Folder Name or ID',
 		name: 'folderIdToModify',
-		type: 'number',
-		default: 0,
+		type: 'options',
+		default: '',
+		required: true,
 		typeOptions: {
-			minValue: 1,
+			loadOptionsMethod: 'getFolders',
+			loadOptionsDependsOn: ['workspaceId'],
 		},
 		displayOptions: {
 			show: {
@@ -73,7 +77,8 @@ export const foldersFields: INodeProperties[] = [
 				operation: ['updateFolder', 'deleteFolder'],
 			},
 		},
-		description: 'The ID of the folder to update or delete',
+		description:
+			'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
 	},
 	{
 		displayName: 'Name',
@@ -89,29 +94,33 @@ export const foldersFields: INodeProperties[] = [
 		description: 'Folder name',
 	},
 	{
-		displayName: 'Icon',
-		name: 'icon',
-		type: 'string',
-		default: '',
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
 		displayOptions: {
 			show: {
 				resource: ['folder'],
 				operation: ['createFolder', 'updateFolder'],
 			},
 		},
-		description: 'Optional folder icon slug',
-	},
-	{
-		displayName: 'Color',
-		name: 'color',
-		type: 'color',
-		default: '',
-		displayOptions: {
-			show: {
-				resource: ['folder'],
-				operation: ['createFolder', 'updateFolder'],
+		options: [
+			{
+				displayName: 'Icon',
+				name: 'icon',
+				type: 'string',
+				default: '',
+				description: 'Folder icon slug',
 			},
-		},
-		description: 'Optional folder color',
+			{
+				displayName: 'Color',
+				name: 'color',
+				type: 'options',
+				options: colorOptions,
+				default: '',
+				description: 'Folder color',
+			},
+		],
 	},
 ];
