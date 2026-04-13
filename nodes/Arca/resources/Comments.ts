@@ -15,14 +15,14 @@ export const commentsOperations: INodeProperties[] = [
 			{
 				name: 'Create Comment',
 				value: 'createComment',
-				action: 'Create a new comment on a task',
+				action: 'Create a new comment',
 				description: 'Create a new comment on a task',
 			},
 			{
 				name: 'List Comments',
 				value: 'listComments',
-				action: 'Return all comments on a task',
-				description: 'Return all comments on a task',
+				action: 'List comments',
+				description: 'List all comments on a task',
 			},
 		],
 		default: 'listComments',

@@ -15,8 +15,8 @@ export const userOperations: INodeProperties[] = [
 			{
 				name: 'Get Current User',
 				value: 'getCurrentUser',
-				action: 'Return the authenticated user profile',
-				description: 'Return the authenticated user profile',
+				action: 'Get the authenticated user profile',
+				description: 'Get the authenticated user profile',
 			},
 		],
 		default: 'getCurrentUser',

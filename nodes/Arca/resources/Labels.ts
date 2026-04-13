@@ -15,7 +15,7 @@ export const labelsOperations: INodeProperties[] = [
 			{
 				name: 'Create Label',
 				value: 'createLabel',
-				action: 'Create a new workspace label',
+				action: 'Create a label',
 				description: 'Create a new workspace label',
 			},
 			{
@@ -27,14 +27,14 @@ export const labelsOperations: INodeProperties[] = [
 			{
 				name: 'List Labels',
 				value: 'listLabels',
-				action: 'Return all labels in a workspace',
-				description: 'Return all labels in a workspace',
+				action: 'List labels in a workspace',
+				description: 'List all labels in a workspace',
 			},
 			{
 				name: 'Update Label',
 				value: 'updateLabel',
 				action: 'Update an existing label',
-				description: 'Update an existing label',
+				description: 'Update an existing label by ID',
 			},
 		],
 		default: 'listLabels',
