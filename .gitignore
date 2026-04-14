@@ -3,8 +3,9 @@ node_modules
 .tmp
 tmp
 dist
+*.tsbuildinfo
+.tsbuildinfo
 npm-debug.log*
 yarn.lock
 .vscode
-package-lock.json
 deploy-node.sh
