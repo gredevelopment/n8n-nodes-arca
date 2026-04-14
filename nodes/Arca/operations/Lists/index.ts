@@ -67,8 +67,8 @@ export async function updateList(
 	index: number,
 ): Promise<INodeExecutionData> {
 	const listId = this.getNodeParameter('listIdToModify', index) as number;
-	const name = this.getNodeParameter('name', index) as string;
 	const additionalFields = this.getNodeParameter('additionalFields', index, {}) as {
+		name?: string;
 		folderId?: number;
 		icon?: string;
 		color?: string;
@@ -77,8 +77,8 @@ export async function updateList(
 
 	const body: { [key: string]: any } = {};
 
-	if (name) {
-		body.name = name;
+	if (additionalFields.name) {
+		body.name = additionalFields.name;
 	}
 	if (additionalFields.icon) {
 		body.icon = additionalFields.icon;

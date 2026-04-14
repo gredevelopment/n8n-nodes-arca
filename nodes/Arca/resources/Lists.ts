@@ -85,10 +85,11 @@ export const listsFields: INodeProperties[] = [
 		name: 'name',
 		type: 'string',
 		default: '',
+		required: true,
 		displayOptions: {
 			show: {
 				resource: ['list'],
-				operation: ['createList', 'updateList'],
+				operation: ['createList'],
 			},
 		},
 		description: 'List name',
@@ -102,7 +103,7 @@ export const listsFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['list'],
-				operation: ['createList', 'updateList'],
+				operation: ['createList'],
 			},
 		},
 		options: [
@@ -132,6 +133,55 @@ export const listsFields: INodeProperties[] = [
 				options: colorOptions,
 				default: '',
 				description: 'List color',
+			},
+		],
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: ['list'],
+				operation: ['updateList'],
+			},
+		},
+		options: [
+			{
+				displayName: 'Folder Name or ID',
+				name: 'folderId',
+				type: 'options',
+				default: '',
+				typeOptions: {
+					loadOptionsMethod: 'getFolders',
+					loadOptionsDependsOn: ['workspaceId'],
+				},
+				description:
+					'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
+			},
+			{
+				displayName: 'Icon',
+				name: 'icon',
+				type: 'string',
+				default: '',
+				description: 'Icon slug for the list',
+			},
+			{
+				displayName: 'Color',
+				name: 'color',
+				type: 'options',
+				options: colorOptions,
+				default: '',
+				description: 'List color',
+			},
+			{
+				displayName: 'Name',
+				name: 'name',
+				type: 'string',
+				default: '',
+				description: 'List name',
 			},
 		],
 	},
