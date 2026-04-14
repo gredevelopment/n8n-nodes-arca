@@ -108,20 +108,20 @@ export async function updateTask(
 	index: number,
 ): Promise<INodeExecutionData> {
 	const taskId = this.getNodeParameter('taskId', index) as number;
-	const title = this.getNodeParameter('title', index) as string;
-	const listId = this.getNodeParameter('listId', index) as number;
 	const additionalFields = this.getNodeParameter('additionalFields', index, {}) as {
+		title?: string;
 		description?: string;
 		priority?: string;
 		statusIdForTask?: number;
+		listId?: number;
 		dueDate?: string;
 		startDate?: string;
 	};
 
 	const body: { [key: string]: any } = {};
 
-	if (title) {
-		body.title = title;
+	if (additionalFields.title) {
+		body.title = additionalFields.title;
 	}
 	if (additionalFields.description) {
 		body.description = additionalFields.description;
@@ -132,8 +132,8 @@ export async function updateTask(
 	if (additionalFields.statusIdForTask) {
 		body.status_id = additionalFields.statusIdForTask;
 	}
-	if (listId) {
-		body.list_id = listId;
+	if (additionalFields.listId) {
+		body.list_id = additionalFields.listId;
 	}
 	if (additionalFields.dueDate) {
 		body.due_date = additionalFields.dueDate;

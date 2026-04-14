@@ -91,7 +91,7 @@ export const tasksFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['task'],
-				operation: ['listTasks', 'createTask', 'updateTask'],
+				operation: ['listTasks', 'createTask'],
 			},
 		},
 		description:
@@ -105,7 +105,7 @@ export const tasksFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['task'],
-				operation: ['createTask', 'updateTask'],
+				operation: ['createTask'],
 			},
 		},
 		description: 'Task title',
@@ -119,7 +119,7 @@ export const tasksFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['task'],
-				operation: ['createTask', 'updateTask'],
+				operation: ['createTask'],
 			},
 		},
 		options: [
@@ -172,6 +172,81 @@ export const tasksFields: INodeProperties[] = [
 			},
 		],
 	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: ['task'],
+				operation: ['updateTask'],
+			},
+		},
+		options: [
+			{
+				displayName: 'Description',
+				name: 'description',
+				type: 'string',
+				default: '',
+				description: 'Task description as HTML',
+			},
+			{
+				displayName: 'Due Date',
+				name: 'dueDate',
+				type: 'string',
+				default: '',
+				description: 'Due date in ISO 8601 format',
+			},
+			{
+				displayName: 'List Name or ID',
+				name: 'listId',
+				type: 'options',
+				default: '',
+				typeOptions: {
+					loadOptionsMethod: 'getLists',
+					loadOptionsDependsOn: ['workspaceId'],
+				},
+				description:
+					'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
+			},
+			{
+				displayName: 'Priority',
+				name: 'priority',
+				type: 'options',
+				options: [
+					{ name: 'High', value: 'high' },
+					{ name: 'Low', value: 'low' },
+					{ name: 'Medium', value: 'medium' },
+					{ name: 'None', value: 'none' },
+					{ name: 'Urgent', value: 'urgent' },
+				],
+				default: 'none',
+				description: 'Task priority',
+			},
+			{
+				displayName: 'Start Date',
+				name: 'startDate',
+				type: 'string',
+				default: '',
+				description: 'Start date in ISO 8601 format',
+			},
+			{
+				displayName: 'Status Name or ID',
+				name: 'statusIdForTask',
+				type: 'options',
+				default: '',
+				typeOptions: {
+					loadOptionsMethod: 'getStatuses',
+					loadOptionsDependsOn: ['workspaceId'],
+				},
+				description:
+					'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
+			},
+		],
+	},
+
 	{
 		displayName: 'Additional Fields',
 		name: 'additionalFields',
