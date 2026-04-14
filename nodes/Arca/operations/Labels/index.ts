@@ -58,15 +58,15 @@ export async function updateLabel(
 	index: number,
 ): Promise<INodeExecutionData> {
 	const labelId = this.getNodeParameter('labelId', index) as number;
-	const name = this.getNodeParameter('name', index) as string;
 	const additionalFields = this.getNodeParameter('additionalFields', index, {}) as {
+		name?: string;
 		color?: string;
 	};
 
 	const body: { [key: string]: any } = {};
 
-	if (name) {
-		body.name = name;
+	if (additionalFields.name) {
+		body.name = additionalFields.name;
 	}
 	if (additionalFields.color) {
 		body.color = additionalFields.color;

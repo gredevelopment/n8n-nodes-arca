@@ -85,10 +85,11 @@ export const labelsFields: INodeProperties[] = [
 		name: 'name',
 		type: 'string',
 		default: '',
+		required: true,
 		displayOptions: {
 			show: {
 				resource: ['label'],
-				operation: ['createLabel', 'updateLabel'],
+				operation: ['createLabel'],
 			},
 		},
 		description: 'Label name',
@@ -102,10 +103,40 @@ export const labelsFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['label'],
-				operation: ['createLabel', 'updateLabel'],
+				operation: ['createLabel'],
 			},
 		},
 		options: [
+			{
+				displayName: 'Color',
+				name: 'color',
+				type: 'options',
+				options: colorOptions,
+				default: '',
+				description: 'Label color',
+			},
+		],
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: ['label'],
+				operation: ['updateLabel'],
+			},
+		},
+		options: [
+			{
+				displayName: 'Name',
+				name: 'name',
+				type: 'string',
+				default: '',
+				description: 'Label name',
+			},
 			{
 				displayName: 'Color',
 				name: 'color',
