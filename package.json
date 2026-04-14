@@ -12,8 +12,8 @@
 	"license": "MIT",
 	"homepage": "https://docs.getarca.app/",
 	"author": {
-		"name": "Gre Development",
-		"email": "support@getarca.app"
+		"name": "GRE Development Ltd",
+		"email": "info@getarca.app"
 	},
 	"repository": {
 		"type": "git",
@@ -26,7 +26,8 @@
 		"format": "prettier nodes credentials --write",
 		"lint": "eslint nodes credentials package.json",
 		"lintfix": "eslint nodes credentials package.json --fix",
-		"prepublishOnly": "npm run build && npm run lint -c .eslintrc.prepublish.js nodes credentials package.json"
+		"prepublishOnly": "npm run build && npm run lint -c .eslintrc.prepublish.js nodes credentials package.json",
+		"release": "npm version patch && git push --follow-tags"
 	},
 	"files": [
 		"dist"
@@ -42,6 +43,7 @@
 		]
 	},
 	"devDependencies": {
+		"@n8n/node-cli": "^0.23.0",
 		"@typescript-eslint/parser": "~5.45",
 		"eslint-plugin-n8n-nodes-base": "^1.11.0",
 		"gulp": "^4.0.2",

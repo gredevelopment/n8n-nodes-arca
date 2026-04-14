@@ -1,2 +1,49 @@
+# macOS system files
 .DS_Store
+
+# TypeScript build info
 *.tsbuildinfo
+**/*.tsbuildinfo
+
+# Source directories (only dist/ should be published)
+nodes/
+credentials/
+
+# Development and build configuration
+.editorconfig
+.eslintrc.js
+.eslintrc.prepublish.js
+.prettierrc.js
+gulpfile.js
+tsconfig.json
+
+# Git and GitHub
+.git/
+.github/
+.gitignore
+
+# Dependencies
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Test files
+test/
+tests/
+*.test.ts
+*.test.js
+*.spec.ts
+*.spec.js
+
+# Misc
+.env
+.env.local
