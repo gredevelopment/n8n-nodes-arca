@@ -70,9 +70,9 @@ export async function updateStatus(
 	index: number,
 ): Promise<INodeExecutionData> {
 	const statusId = this.getNodeParameter('statusId', index) as number;
-	const name = this.getNodeParameter('name', index) as string;
-	const category = this.getNodeParameter('category', index) as string;
 	const additionalFields = this.getNodeParameter('additionalFields', index, {}) as {
+		name?: string;
+		category?: string;
 		icon?: string;
 		color?: string;
 		position?: number;
@@ -80,11 +80,11 @@ export async function updateStatus(
 
 	const body: { [key: string]: any } = {};
 
-	if (name) {
-		body.name = name;
+	if (additionalFields.name) {
+		body.name = additionalFields.name;
 	}
-	if (category) {
-		body.category = category;
+	if (additionalFields.category) {
+		body.category = additionalFields.category;
 	}
 	if (additionalFields.icon) {
 		body.icon = additionalFields.icon;
@@ -92,7 +92,7 @@ export async function updateStatus(
 	if (additionalFields.color) {
 		body.color = additionalFields.color;
 	}
-	if (additionalFields.position) {
+	if (additionalFields.position !== undefined) {
 		body.position = additionalFields.position;
 	}
 

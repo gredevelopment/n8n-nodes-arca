@@ -85,10 +85,11 @@ export const statusesFields: INodeProperties[] = [
 		name: 'name',
 		type: 'string',
 		default: '',
+		required: true,
 		displayOptions: {
 			show: {
 				resource: ['status'],
-				operation: ['createStatus', 'updateStatus'],
+				operation: ['createStatus'],
 			},
 		},
 		description: 'Status label',
@@ -104,10 +105,11 @@ export const statusesFields: INodeProperties[] = [
 			{ name: 'Cancelled', value: 'cancelled' },
 		],
 		default: 'pending',
+		required: true,
 		displayOptions: {
 			show: {
 				resource: ['status'],
-				operation: ['createStatus', 'updateStatus'],
+				operation: ['createStatus'],
 			},
 		},
 		description: 'Status category. Must be one of pending, in_progress, completed, or cancelled.',
@@ -121,7 +123,7 @@ export const statusesFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['status'],
-				operation: ['createStatus', 'updateStatus'],
+				operation: ['createStatus'],
 			},
 		},
 		options: [
@@ -139,6 +141,57 @@ export const statusesFields: INodeProperties[] = [
 				options: colorOptions,
 				default: '',
 				description: 'Status color',
+			},
+		],
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: ['status'],
+				operation: ['updateStatus'],
+			},
+		},
+		options: [
+			{
+				displayName: 'Category',
+				name: 'category',
+				type: 'options',
+				options: [
+					{ name: 'Pending', value: 'pending' },
+					{ name: 'In Progress', value: 'in_progress' },
+					{ name: 'Completed', value: 'completed' },
+					{ name: 'Cancelled', value: 'cancelled' },
+				],
+				default: 'pending',
+				description:
+					'Status category. Must be one of pending, in_progress, completed, or cancelled.',
+			},
+			{
+				displayName: 'Color',
+				name: 'color',
+				type: 'options',
+				options: colorOptions,
+				default: '',
+				description: 'Status color',
+			},
+			{
+				displayName: 'Icon',
+				name: 'icon',
+				type: 'string',
+				default: '',
+				description: 'Status icon slug',
+			},
+			{
+				displayName: 'Name',
+				name: 'name',
+				type: 'string',
+				default: '',
+				description: 'Status label',
 			},
 			{
 				displayName: 'Position',
