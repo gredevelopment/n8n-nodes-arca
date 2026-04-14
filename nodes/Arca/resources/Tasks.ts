@@ -91,7 +91,7 @@ export const tasksFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['task'],
-				operation: ['listTasks', 'createTask'],
+				operation: ['createTask'],
 			},
 		},
 		description:
@@ -260,6 +260,18 @@ export const tasksFields: INodeProperties[] = [
 			},
 		},
 		options: [
+			{
+				displayName: 'List Name or ID',
+				name: 'listId',
+				type: 'options',
+				default: '',
+				typeOptions: {
+					loadOptionsMethod: 'getLists',
+					loadOptionsDependsOn: ['workspaceId'],
+				},
+				description:
+					'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
+			},
 			{
 				displayName: 'Page',
 				name: 'page',

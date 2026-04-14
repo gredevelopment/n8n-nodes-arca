@@ -6,8 +6,8 @@ export async function listTasks(
 	index: number,
 ): Promise<INodeExecutionData> {
 	const workspaceId = this.getNodeParameter('workspaceId', index) as number;
-	const listId = this.getNodeParameter('listId', index) as number;
 	const additionalFields = this.getNodeParameter('additionalFields', index, {}) as {
+		listId?: number;
 		page?: number;
 		limit?: number;
 	};
@@ -17,8 +17,8 @@ export async function listTasks(
 		limit: additionalFields.limit || 50,
 	};
 
-	if (listId) {
-		qs.list_id = listId;
+	if (additionalFields.listId) {
+		qs.list_id = additionalFields.listId;
 	}
 
 	const options: IHttpRequestOptions = {
