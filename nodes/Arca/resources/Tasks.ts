@@ -244,6 +244,13 @@ export const tasksFields: INodeProperties[] = [
 				description:
 					'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
 			},
+			{
+				displayName: 'Title',
+				name: 'title',
+				type: 'string',
+				default: '',
+				description: 'Task title',
+			},
 		],
 	},
 
