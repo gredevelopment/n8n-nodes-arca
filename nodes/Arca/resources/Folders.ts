@@ -85,10 +85,11 @@ export const foldersFields: INodeProperties[] = [
 		name: 'name',
 		type: 'string',
 		default: '',
+		required: true,
 		displayOptions: {
 			show: {
 				resource: ['folder'],
-				operation: ['createFolder', 'updateFolder'],
+				operation: ['createFolder'],
 			},
 		},
 		description: 'Folder name',
@@ -102,10 +103,47 @@ export const foldersFields: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['folder'],
-				operation: ['createFolder', 'updateFolder'],
+				operation: ['createFolder'],
 			},
 		},
 		options: [
+			{
+				displayName: 'Icon',
+				name: 'icon',
+				type: 'string',
+				default: '',
+				description: 'Folder icon slug',
+			},
+			{
+				displayName: 'Color',
+				name: 'color',
+				type: 'options',
+				options: colorOptions,
+				default: '',
+				description: 'Folder color',
+			},
+		],
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: ['folder'],
+				operation: ['updateFolder'],
+			},
+		},
+		options: [
+			{
+				displayName: 'Name',
+				name: 'name',
+				type: 'string',
+				default: '',
+				description: 'Folder name',
+			},
 			{
 				displayName: 'Icon',
 				name: 'icon',
