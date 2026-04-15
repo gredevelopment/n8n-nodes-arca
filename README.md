@@ -38,6 +38,30 @@ This node supports the following Arca resources:
 
 Available operations include listing, creating, updating, deleting, and fetching details for each supported resource.
 
+## Using as an AI Agent Tool
+
+The Arca node is fully compatible with n8n AI agents and can be used as a tool in AI workflows. When connected to an AI agent, the node enables:
+
+- **Task Management**: Create, update, and organize tasks through natural language
+- **Label Management**: Update label names and colors dynamically
+- **Workspace Organization**: Manage folders, lists, and statuses
+- **Productivity Automation**: Let AI agents handle routine workspace operations
+
+### Example: Update Label Tool
+
+When used as an AI agent tool, you can ask the agent to:
+- "Update the label 'Bug' to 'Critical Bug' with red color"
+- "Change the color of label ID 5 to orange"
+- "Rename the 'Tech Debt' label to 'Technical Improvements'"
+
+The agent will automatically:
+1. Select the correct resource (label)
+2. Choose the update operation
+3. Fill in the required parameters (label ID)
+4. Apply optional fields (name, color) as needed
+
+All operations support this natural language interface when the node is connected to an AI agent in your workflow.
+
 ## Credentials
 
 To use the Arca node, configure your Arca API credentials in n8n:
