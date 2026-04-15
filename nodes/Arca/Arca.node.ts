@@ -165,21 +165,6 @@ export class Arca implements INodeType {
 			},
 		],
 		usableAsTool: true,
-		codex: {
-			categories: ['Productivity', 'Development'],
-			subcategories: {
-				Productivity: ['Task Management', 'Project Management'],
-				Development: ['Collaboration Tools'],
-			},
-			resources: {
-				primaryDocumentation: [
-					{
-						url: 'https://docs.getarca.app/',
-					},
-				],
-			},
-			alias: ['arca', 'task manager', 'workspace', 'project management'],
-		},
 		properties: [
 			{
 				displayName: 'Resource',
