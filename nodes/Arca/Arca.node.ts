@@ -7,6 +7,8 @@
 	INodeTypeDescription,
 	IHttpRequestOptions,
 	NodeOperationError,
+	NodeApiError,
+	JsonObject,
 } from 'n8n-workflow';
 import { baseUrl } from './baseUrl';
 
@@ -164,6 +166,7 @@ export class Arca implements INodeType {
 				required: true,
 			},
 		],
+		usableAsTool: true,
 		properties: [
 			{
 				displayName: 'Resource',
@@ -322,7 +325,7 @@ export class Arca implements INodeType {
 						pairedItem: { item: i },
 					});
 				} else {
-					throw error;
+					throw new NodeApiError(this.getNode(), error as JsonObject);
 				}
 			}
 		}

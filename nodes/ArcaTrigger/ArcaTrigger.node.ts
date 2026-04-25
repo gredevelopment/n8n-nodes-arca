@@ -4,6 +4,7 @@ import {
 	INodeType,
 	INodeTypeDescription,
 	IWebhookResponseData,
+	IHookFunctions,
 } from 'n8n-workflow';
 
 export class ArcaTrigger implements INodeType {
@@ -37,8 +38,9 @@ export class ArcaTrigger implements INodeType {
 		],
 		properties: [
 			{
-				displayName:
-					'Add the webhook URL in your Arca dashboard under Settings → Webhooks to start receiving events.',
+				displayName: 'Webhook Setup Instructions',
+				description:
+					'Add the webhook URL in your Arca dashboard under Settings → Webhooks to start receiving events',
 				name: 'notice',
 				type: 'notice',
 				default: '',
@@ -182,4 +184,25 @@ export class ArcaTrigger implements INodeType {
 			},
 		};
 	}
+
+	webhookMethods = {
+		default: {
+			async checkExists(this: IHookFunctions): Promise<boolean> {
+				// Arca does not support programmatic webhook checking via API
+				// Return false to indicate the webhook needs manual setup in Arca dashboard
+				return false;
+			},
+			async create(this: IHookFunctions): Promise<boolean> {
+				// Arca does not support programmatic webhook creation via API
+				// Webhooks must be manually configured in the Arca dashboard
+				// under Settings → Webhooks using the webhook URL provided by n8n
+				return true;
+			},
+			async delete(this: IHookFunctions): Promise<boolean> {
+				// Arca does not support programmatic webhook deletion via API
+				// Webhooks must be manually removed in the Arca dashboard
+				return true;
+			},
+		},
+	};
 }
