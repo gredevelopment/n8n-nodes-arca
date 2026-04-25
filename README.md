@@ -50,17 +50,77 @@ The Arca node is fully compatible with n8n AI agents and can be used as a tool i
 ### Example: Update Label Tool
 
 When used as an AI agent tool, you can ask the agent to:
+
 - "Update the label 'Bug' to 'Critical Bug' with red color"
 - "Change the color of label ID 5 to orange"
 - "Rename the 'Tech Debt' label to 'Technical Improvements'"
 
 The agent will automatically:
+
 1. Select the correct resource (label)
 2. Choose the update operation
 3. Fill in the required parameters (label ID)
 4. Apply optional fields (name, color) as needed
 
 All operations support this natural language interface when the node is connected to an AI agent in your workflow.
+
+## Usage Examples
+
+### Example 1: List All Workspaces
+
+This example shows how to retrieve all workspaces accessible with your Arca API credentials.
+
+**Steps:**
+
+1. Add the **Arca** node to your workflow
+2. Configure your **Arca API** credentials (see Credentials section)
+3. Select the following parameters:
+   - **Resource**: Workspaces
+   - **Operation**: List Workspaces
+4. Execute the node
+
+**Result:** The node returns a JSON array of all workspaces with their details (id, name, slug, description, created date, etc.).
+
+### Example 2: Create a New Task
+
+This example demonstrates creating a task in a specific workspace and list.
+
+**Steps:**
+
+1. Add the **Arca** node to your workflow
+2. Configure your **Arca API** credentials
+3. Select the following parameters:
+   - **Resource**: Tasks
+   - **Operation**: Create Task
+   - **Workspace ID**: Select your target workspace from the dropdown
+   - **Title**: Enter the task title (e.g., "Review Q1 metrics")
+   - **List ID** (optional): Select a list to organize the task
+   - **Description** (optional): Add task details
+   - **Status ID** (optional): Set initial status
+   - **Priority** (optional): Set priority (low, medium, high, urgent)
+   - **Due Date** (optional): Set a deadline
+4. Execute the node
+
+**Result:** The node returns the newly created task object with all its properties including the assigned task ID.
+
+### Example 3: Automated Webhook Processing
+
+This example shows how to receive real-time notifications from Arca when tasks are updated.
+
+**Steps:**
+
+1. Add the **Arca Trigger** node to your workflow
+2. Copy the webhook URL shown in the node
+3. In your Arca workspace:
+   - Go to **Settings → Webhooks**
+   - Click **Add Webhook**
+   - Paste the webhook URL from step 2
+   - Select the events you want to receive (e.g., task.created, task.updated)
+   - Optionally set an auth token for security
+4. (Optional) If you set an auth token in Arca, enter the same token in the **Auth Token** field of the Arca Trigger node
+5. Activate your workflow
+
+**Result:** When a task event occurs in your Arca workspace, the workflow automatically triggers and processes the webhook payload. The trigger node outputs the event data including the event type, workspace info, user who triggered the event, and before/after states of the changed resource.
 
 ## Credentials
 
