@@ -15,7 +15,7 @@ export class ArcaTrigger implements INodeType {
 		group: ['trigger'],
 		version: 1,
 		description:
-			'Receive real-time HTTPS notifications from Arca when events happen in your workspaces, such as task creation, status changes, list updates, and more',
+			'Receive real-time notifications from Arca when events happen in your workspaces, such as task creation, status changes, list updates, and more',
 		defaults: {
 			name: 'Arca Trigger',
 		},
