@@ -1,0 +1,10 @@
+---
+description: 'Arca n8n community node package'
+alwaysApply: true
+---
+
+# n8n-nodes-arca
+
+TypeScript n8n community node package. Build icons via Gulp; lint with `eslint-plugin-n8n-nodes-base`.
+
+Resources mirror Arca API: Workspaces, Folders, Lists, Tasks, Statuses, Labels, Comments, User. Keep operations in sync with `arca-server` API.

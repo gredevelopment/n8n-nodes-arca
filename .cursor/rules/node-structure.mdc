@@ -1,0 +1,19 @@
+---
+description: 'n8n node and credential structure'
+globs: nodes/**, credentials/**
+alwaysApply: false
+---
+
+# Node Structure
+
+- `nodes/Arca/Arca.node.ts` — main node with resources and operations
+- `nodes/ArcaTrigger/ArcaTrigger.node.ts` — trigger node
+- `credentials/` — API key credential type
+- Resources in `nodes/Arca/resources/` (Workspaces, Tasks, Lists, etc.)
+- Operations in `nodes/Arca/operations/` grouped by resource
+
+Follow n8n community node conventions:
+
+- Resource/operation naming matches n8n patterns
+- Use `baseUrl.ts` for API base URL configuration
+- Operation files export display options and execute logic per resource

@@ -1,0 +1,15 @@
+---
+description: 'n8n ESLint rules for community nodes'
+globs: **/*.ts, .eslintrc*, eslint.config.*
+alwaysApply: false
+---
+
+# n8n Lint
+
+Uses `eslint-plugin-n8n-nodes-base` for community node compliance.
+
+Run ESLint before committing. Follow n8n node base class requirements:
+
+- Correct `description` fields on node properties
+- Proper `displayOptions` show/hide logic
+- Valid credential references
